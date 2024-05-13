@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div>
+        <label for="book-title">Title</label>
+        <input type="text" id="book-title">
+    </div>
+    <div>
+        <label for="book-author">Author</label>
+        <input type="text" id="book-author">
+    </div>
+    <div>
+        <button id="submit-book">Submit</button>
+    </div>
+    <table id="library-display-table">
+        <thead>
+            <th>
+                <td>Title</td>
+                <td>Author</td>
+            </th>
+        </thead>
+        <tbody id="library-table-body"></tbody>
+        <tfoot></tfoot>
+    </table>
+    <script src="script.js"></script>
+</body>
+</html>
