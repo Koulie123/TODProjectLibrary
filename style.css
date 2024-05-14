@@ -8,3 +8,11 @@ table {
     width: 100%;
     border: 2px solid #000;
 }
+
+table td {
+    border: 2px solid #000;
+}
+#input-form {
+    display: none;
+    flex-direction: column;
+}

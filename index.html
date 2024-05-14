@@ -8,22 +8,37 @@
 </head>
 <body>
     <div>
-        <label for="book-title">Title</label>
-        <input type="text" id="book-title">
+        <button id="display-input-form-button" onclick="toggleFormDisplay()">ADD BOOK</button>
     </div>
-    <div>
-        <label for="book-author">Author</label>
-        <input type="text" id="book-author">
-    </div>
-    <div>
-        <button id="submit-book">Submit</button>
+    <div id="input-form">
+        <div>
+            <label for="book-title">Title</label>
+            <input type="text" id="book-title">
+        </div>
+        <div>
+            <label for="book-author">Author</label>
+            <input type="text" id="book-author">
+        </div>
+        <div>
+            <label for="number-of-pages"># of Pages</label>
+            <input type="number" id="number-of-pages">
+        </div>
+        <div>
+            <input type="checkbox" id="has-been-read">
+            <label for="has-been-read">Has Been Read?</label>
+        </div>
+        <div>
+            <button id="submit-book">Submit</button>
+        </div>
     </div>
     <table id="library-display-table">
         <thead>
-            <th>
-                <td>Title</td>
-                <td>Author</td>
-            </th>
+            <tr>
+                <th>Title</th>
+                <th>Author</th>
+                <th># of Pages</th>
+                <th>Has Been Read</th>
+            </tr>
         </thead>
         <tbody id="library-table-body"></tbody>
         <tfoot></tfoot>
