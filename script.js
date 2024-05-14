@@ -1,4 +1,4 @@
-const myLibrary = [];
+let myLibrary = [];
 const libraryDisplayTable = document.getElementById("library-table-body");
 const bookSubmitButton = document.getElementById("submit-book");
 const bookTitleInput = document.getElementById("book-title")
@@ -9,15 +9,10 @@ const displayInputFormButton = document.getElementById("display-input-form-butto
 const inputForm = document.getElementById("input-form");
 let displayInputForm = false;
 
-
-bookSubmitButton.addEventListener("click", () => {
-    let bookTitle = bookTitleInput.value;
-    let bookAuthor = bookAuthorInput.value;
-    let bookPages = bookNumberOfPagesInput.value;
-    let bookHasBeenRead = bookHasBeenReadInput.checked;
-    let book = new Book(bookTitle, bookAuthor, bookPages, bookHasBeenRead);
-    addBookToLibrary(book);
-})
+function OnInitialized() {
+    myLibrary.push({title: "example", author: "the title", pages: 14, beenRead: true})
+    remakeBookTable();
+}
 
 
 function Book(title, author, numberOfPages, hasBeenRead) {
@@ -54,29 +49,47 @@ function remakeBookTable(){
     while (libraryDisplayTable.firstChild){
         libraryDisplayTable.removeChild(libraryDisplayTable.lastChild);
     }
+    let rowCount = 1;
     myLibrary.forEach(element => {
+        element.rowCount = rowCount;
         const row = document.createElement("tr");
         const title = document.createElement("td");
         const author = document.createElement("td");
         const pages = document.createElement("td");
         const beenRead = document.createElement("td");
-        const removeTD = createRemoveButton();
+        const removeTD = createRemoveButton(rowCount);
+        const rowNumber = document.createElement("td");
+        const toggleReadButton = createReadToggleButton();
         title.textContent = element.title;
         author.textContent = element.author;
         pages.textContent = element.numberOfPages;
         beenRead.textContent = element.hasBeenRead;
+        rowNumber.textContent = rowCount;
+        rowNumber.id = rowCount + "rowId"
+        rowCount += 1;
         row.appendChild(title);
         row.appendChild(author);
         row.appendChild(pages);
         row.appendChild(beenRead);
         row.appendChild(removeTD);
+        row.appendChild(rowNumber);
         libraryDisplayTable.appendChild(row);
     });
     clearInputs();
+    console.log(myLibrary);
 }
-function createRemoveButton() {
+function createReadToggleButton(rowCount) {
+    
+}
+function createRemoveButton(rowCount) {
     const td = document.createElement("td");
     const button = document.createElement("button");
+    button.textContent = "Remove";
+    button.addEventListener("click", () => {
+        myLibrary = myLibrary.filter((book) => book.rowCount !=  rowCount);
+        remakeBookTable();
+        console.log("Removed book");
+    })
     td.appendChild(button);
     return td;
 }
@@ -88,3 +101,13 @@ function toggleFormDisplay() {
         inputForm.style.display = "none";
     }
 }
+bookSubmitButton.addEventListener("click", () => {
+    let bookTitle = bookTitleInput.value;
+    let bookAuthor = bookAuthorInput.value;
+    let bookPages = bookNumberOfPagesInput.value;
+    let bookHasBeenRead = bookHasBeenReadInput.checked;
+    let book = new Book(bookTitle, bookAuthor, bookPages, bookHasBeenRead);
+    addBookToLibrary(book);
+})
+
+OnInitialized();

@@ -16,3 +16,6 @@ table td {
     display: none;
     flex-direction: column;
 }
+ thead {
+    font-weight: 800;
+ }
