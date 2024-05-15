@@ -10,7 +10,7 @@ const inputForm = document.getElementById("input-form");
 let displayInputForm = false;
 
 function OnInitialized() {
-    myLibrary.push({title: "example", author: "the title", pages: 14, beenRead: true})
+    myLibrary.push({title: "example", author: "the title", numberOfPages: 14, hasBeenRead: true})
     remakeBookTable();
 }
 
@@ -59,11 +59,12 @@ function remakeBookTable(){
         const beenRead = document.createElement("td");
         const removeTD = createRemoveButton(rowCount);
         const rowNumber = document.createElement("td");
-        const toggleReadButton = createReadToggleButton();
+        const toggleReadButton = createReadToggleButton(rowCount);
         title.textContent = element.title;
         author.textContent = element.author;
         pages.textContent = element.numberOfPages;
         beenRead.textContent = element.hasBeenRead;
+        beenRead.appendChild(toggleReadButton);
         rowNumber.textContent = rowCount;
         rowNumber.id = rowCount + "rowId"
         rowCount += 1;
@@ -79,7 +80,14 @@ function remakeBookTable(){
     console.log(myLibrary);
 }
 function createReadToggleButton(rowCount) {
-    
+    const button = document.createElement("button");
+    button.textContent = "toggle read Status";
+    button.addEventListener("click", () => handleHasReadToggle(rowCount));
+    return button;
+}
+function handleHasReadToggle(rowCount){
+    myLibrary[rowCount - 1].hasBeenRead = !(myLibrary[rowCount - 1].hasBeenRead);
+    remakeBookTable();
 }
 function createRemoveButton(rowCount) {
     const td = document.createElement("td");
