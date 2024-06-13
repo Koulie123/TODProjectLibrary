@@ -9,18 +9,29 @@ const displayInputFormButton = document.getElementById("display-input-form-butto
 const inputForm = document.getElementById("input-form");
 let displayInputForm = false;
 
+// function OnInitialized() {
+//     myLibrary.push({title: "example", author: "the title", numberOfPages: 14, hasBeenRead: true})
+//     remakeBookTable();
+// }
 function OnInitialized() {
-    myLibrary.push({title: "example", author: "the title", numberOfPages: 14, hasBeenRead: true})
+    myLibrary.push(new Book("the Title", "author name", 14, true));
     remakeBookTable();
 }
-
-
-function Book(title, author, numberOfPages, hasBeenRead) {
-    this.title = title;
-    this.author = author;
-    this.numberOfPages = numberOfPages;
-    this.hasBeenRead = hasBeenRead;
+class Book {
+    constructor(title, author, numberOfPages, hasBeenRead){
+        this.title = title;
+        this.author = author;
+        this.numberOfPages = numberOfPages;
+        this.hasBeenRead = hasBeenRead;
+    }
 }
+
+// function Book(title, author, numberOfPages, hasBeenRead) {
+//     this.title = title;
+//     this.author = author;
+//     this.numberOfPages = numberOfPages;
+//     this.hasBeenRead = hasBeenRead;
+// }
 
 function addBookToLibrary(Book) {
     if (Book.title == "" || Book.author == "" || Book.numberOfPages == 0) return;
@@ -28,18 +39,7 @@ function addBookToLibrary(Book) {
     console.log(`BookAdded = ${Book.title}`);
     remakeBookTable();
 }
-// function updateLibraryTable(Book){
-//     if (Book.title == "" || Book.author == "") return;
-//     const row = document.createElement("tr");
-//     const title = document.createElement("td");
-//     const author = document.createElement("td");
-//     title.textContent = Book.title;
-//     author.textContent = Book.author;
-//     row.appendChild(title);
-//     row.appendChild(author);
-//     libraryDisplayTable.appendChild(row);
-//     clearInputs();
-// }
+
 function clearInputs() {
     bookTitleInput.value = "";
     bookAuthorInput.value = "";
